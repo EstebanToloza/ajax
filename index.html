@@ -70,21 +70,14 @@
 			//window.onload = function() {
 
 
-				const producto = {
+/* 				const producto = {
 					nombre : "Menú ejecutivo",
 					precio : 249.99,
 					stock : 1000,
 					imagen : "http://lorempixel.com/480/320/food/"
-				}
+				} */
 
-				const articulo = document.querySelector('article').cloneNode(true)
 
-				articulo.querySelector('img').src = producto.imagen
-				articulo.querySelector('h4 a').innerText = producto.nombre
-				articulo.querySelector('h4 span').innerText = "$" + producto.precio
-				articulo.querySelector('p').innerText = producto.stock + " unid"
-
-				document.querySelector('#productos-destacados').appendChild(articulo)
 
 
 
@@ -94,8 +87,23 @@
 				return response.json()   //<<< reemplaza a JSON.parse()
 
 			}).then(function(productos){
-				console.log("A ver que hay en el parámetro 'productos'")
-				console.log(productos)
+				//console.log("A ver que hay en el parámetro 'productos'")
+				//console.table(productos)
+
+				productos.forEach(function(producto){
+					////////////////////
+					const articulo = document.querySelector('article').cloneNode(true)
+
+					articulo.querySelector('img').src = producto.Imagen
+					articulo.querySelector('h4 a').innerText = producto.Nombre
+					articulo.querySelector('h4 span').innerText = "$" + producto.Precio
+					articulo.querySelector('p').innerText = producto.Stock + " unid"
+
+					document.querySelector('#productos-destacados').appendChild(articulo)
+					////////////////////
+
+				})
+				
 			}).catch(function(){
 				alert("Upps... como que no hay datos!")
 			})
