@@ -90,6 +90,23 @@
 
 			//}
 
+			fetch("https://api.npoint.io/15a01232d62ae76273b4").then(function(response){  //<--- CALLBACK
+				return response.json()   //<<< reemplaza a JSON.parse()
+
+			}).then(function(productos){
+				console.log("A ver que hay en el parámetro 'productos'")
+				console.log(productos)
+			}).catch(function(){
+				alert("Upps... como que no hay datos!")
+			})
+
+
+
+
+/* 			let ajax = new XMLHttpRequest()
+			ajax.open("GET", "https://api.npoint.io/15a01232d62ae76273b4")
+			ajax.onload = */
+
 
 		</script>
 	</body>
