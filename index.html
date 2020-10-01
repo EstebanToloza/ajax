@@ -71,29 +71,14 @@
 		
 		<script>
 
-			//window.onload = function() {
-
-
-/* 				const producto = {
-					nombre : "Menú ejecutivo",
-					precio : 249.99,
-					stock : 1000,
-					imagen : "http://lorempixel.com/480/320/food/"
-				} */
-
-			//}
 
 			//let ajax = new XMLHttpRequest() // Ésta forma de trabajar con ajax ya no se usa másen la actualidad
 			
-			fetch("https://api.npoint.io/15a01232d62ae76273b4").then(function(response){  //<--- CALLBACK. Es una función adentro de una función. 
-				return response.json()   //<<< Aquí le estamos diciendo que interprete la información como un archivo JSON. El .json reemplaza a JSON.parse() En "response" recibimos dos tipos de información; por un lado el contenido de la api (el body) y por otro lado el contenido acerca del contenido (el header) (como al recibir un sobre recibimos tanto el "sobre" (header) como la "carta" en sí (body))
+			fetch("https://api.npoint.io/15a01232d62ae76273b4").then( response => response.json() ).then( productos => {  //<--- CALLBACK. Es una función adentro de una función. 
 
-			}).then(function(productos){ //en éste segundo .then ya puedo trabajar con los datos obtenidos anteriormente
+			 //en éste segundo .then ya puedo trabajar con los datos obtenidos anteriormente
 			
-				//console.log("A ver que hay en el parámetro 'productos'")
-				//console.table(productos)
-
-				productos.forEach(function(producto){
+				productos.forEach( producto => {  //en las funciones flecha no son necesarios los paréntesis si hay un único parámetro
 					////////////////////
 					const articulo = document.querySelector('article').cloneNode(true)
 
@@ -103,13 +88,14 @@
 					articulo.querySelector('p').innerText = producto.Stock + " unid."
 
 					document.querySelector('#productos-destacados').appendChild(articulo)
-					////////////////////
-
+					////////////////////)
 				})
-				
-			}).catch(function(){
-				alert("Upps... como que no hay datos!")
+
+				}).catch(() => {
+					alert("Upps... como que no hay datos!")
 			})
+
+			
 
 
 
