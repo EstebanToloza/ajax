@@ -19,7 +19,7 @@
 
 			<!-- AREA PRODUCTOS DESTACADOS -->
 			<section id="productos-destacados" class="row py-3">
-				<article class="col-4">
+				<article class="col-4 d-none">
 					<div class="card h-100">
 						<a href="#">
 							<img class="card-img-top img-fluid" src="http://placeimg.com/480/320/tech" alt="">
@@ -32,31 +32,6 @@
 					</div>	
 				</article>
 
-				<article class="col-4">
-					<div class="card h-100">
-						<a href="#">
-							<img class="card-img-top img-fluid" src="http://lorempixel.com/480/320/technics/" alt="">
-						</a>
-						<div class="card-body">
-							<h4 class="card-title"><a href="#">Producto Y</a> <span class="badge badge-pill badge-success float-right">$999.99</span></h4>
-							<p class="card-text">9999 unid.</p>
-							<button class="btn btn-primary float-right">Comprar</button>
-						</div>
-					</div>	
-				</article>
-
-				<article class="col-4">
-					<div class="card h-100">
-						<a href="#">
-							<img class="card-img-top img-fluid" src="https://picsum.photos/480/320/" alt="">
-						</a>
-						<div class="card-body">
-							<h4 class="card-title"><a href="#">Producto Z</a> <span class="badge badge-pill badge-success float-right">$999.99</span></h4>
-							<p class="card-text">9999 unid.</p>
-							<button class="btn btn-primary float-right">Comprar</button>
-						</div>
-					</div>	
-				</article>
 
 			</section>
 		</main>
@@ -71,12 +46,9 @@
 		
 		<script>
 
-
-			//let ajax = new XMLHttpRequest() // Ésta forma de trabajar con ajax ya no se usa másen la actualidad
+			const cargarScript = function(){
 			
 			fetch("https://api.npoint.io/15a01232d62ae76273b4").then( response => response.json() ).then( productos => {  //<--- CALLBACK. Es una función adentro de una función. 
-
-			 //en éste segundo .then ya puedo trabajar con los datos obtenidos anteriormente
 			
 				productos.forEach( producto => {  //en las funciones flecha no son necesarios los paréntesis si hay un único parámetro
 					////////////////////
@@ -84,27 +56,21 @@
 
 					articulo.querySelector('img').src = producto.Imagen
 					articulo.querySelector('h4 a').innerText = `${producto.Marca} - ${producto.Nombre}` //Una forma recomendada en ES6 para concatenar contenido
-					//articulo.querySelector('h4 span').innerText = "$" + producto.Precio
 					articulo.querySelector('h4 span').innerText = `BTC ${producto.Precio}` 
 					articulo.querySelector('p').innerText = producto.Stock + " unid."
 
+					articulo.classList.remove('d-none')
+					
 					document.querySelector('#productos-destacados').appendChild(articulo)
 					////////////////////)
 				})
 
 				}).catch(() => {
 					alert("Upps... como que no hay datos!")
-			})
+				})
+			}
 
-			
-
-
-
-
-/* 			let ajax = new XMLHttpRequest()
-			ajax.open("GET", "https://api.npoint.io/15a01232d62ae76273b4")
-			ajax.onload = */
-
+			window.onload = cargarScript
 
 		</script>
 	</body>
