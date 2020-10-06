@@ -123,7 +123,7 @@
 				})
 			}*/
 
-			const crearProducto = () => {
+			const crearProducto = async () => {
 				
 				const nombre = prompt("Ingrese nombre")
 				const marca = prompt("Ingrese marca")
@@ -131,11 +131,22 @@
 				const precio = prompt("Ingrese precio")
 				const imagen = prompt("Ingrese URL de la imagen")
 
-				console.log(nombre)
-				console.log(marca)
-				console.log(stock)
-				console.log(precio)
-				console.log(imagen)
+				const datos = new FormData()
+				datos.append("nombre", nombre)
+				datos.append("marca", marca)
+				datos.append("stock", stock)
+				datos.append("precio", precio)
+				datos.append("imagen", imagen)
+
+				const configs = {
+					method : "POST",
+					headers : {
+						"Content-Type" : "application/x-www-form-urlencoded"
+					},
+					body : datos
+				}
+
+				await fetch("http://acualquierladolomando.com", configs)
 			}
 
 			document.querySelector("#agregar-producto").onclick = crearProducto
